@@ -12,6 +12,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
 
+
+morgan.token("body", req => JSON.stringify(req.body));
+
 let persons = [
   {
     name: 'Arto Hellas',
@@ -71,7 +74,8 @@ app.post('/api/persons', async (req, res) => {
     return res.status(400).json({
       error: 'content missing',
     });
-  } else if (person.name) {
+  } 
+  if (persons.includes(person.name)) {
     return res.status(400).json({
       error: 'Name must be unique',
     });
