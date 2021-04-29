@@ -12,8 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
 
-
-morgan.token("body", req => JSON.stringify(req.body));
+morgan.token('body', (req) => JSON.stringify(req.body));
 
 let persons = [
   {
@@ -38,7 +37,7 @@ let persons = [
   },
   {
     name: 'poop',
-    number: '666',
+    number: '6786',
     id: 5,
   },
 ];
@@ -74,7 +73,7 @@ app.post('/api/persons', async (req, res) => {
     return res.status(400).json({
       error: 'content missing',
     });
-  } 
+  }
   if (persons.includes(person.name)) {
     return res.status(400).json({
       error: 'Name must be unique',
@@ -106,7 +105,7 @@ app.delete('/api/persons/:id', async (req, res) => {
 
   res.status(204).end();
 });
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
   console.log(`Listening in on port: ${PORT}`);
